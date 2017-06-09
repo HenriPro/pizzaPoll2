@@ -16,8 +16,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Choices />
-        <Results/>
+        <Choices setResults={this.getPizzaPoll.bind(this)} />
+        <Results pizzas={this.state.pizzaPoll}/>
       </div>
     );
   }
@@ -41,7 +41,8 @@ class Choices extends React.Component  {
     console.log(this.state);
   };
   handleButton(e) {
-    console.log(this.state)
+    this.props.setResults(this.state);
+  //  console.log(this.state)
   }
 
   render() {
@@ -89,9 +90,24 @@ class Choices extends React.Component  {
   }
 }
 
-var Results = ({prop}) => (
+var Results = ({pizzas}) => (
   <div>
-    <h4>results</h4>
+    <h4>Results</h4>
+    {pizzas.map((pizza) =>
+        <ResultEntry
+          name={pizza.name}
+          number={pizza.number}
+          pieOrSlice={pizza.pieOrSlice}
+          type={pizza.type}
+        />
+    )}
+  </div>
+);
+
+
+var ResultEntry = ({name,number,pieOrSlice,type}) => (
+  <div>
+  <h4>{name} wants {number} of {type} {pieOrSlice}</h4>
   </div>
 );
 
