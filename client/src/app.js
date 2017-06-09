@@ -26,8 +26,11 @@ class App extends React.Component {
 class Choices extends React.Component  {
   constructor(props) {
     super(props)
+
+
     this.state = {
     };
+    this.state.pizzaType = 'vegan';
   }
 
   handleChange(e) {
@@ -36,13 +39,12 @@ class Choices extends React.Component  {
     this.setState({
       [name]: value
     });
-    console.log(e.target.name);
 
     console.log(this.state);
   };
   handleButton(e) {
     this.props.setResults(this.state);
-  //  console.log(this.state)
+    console.log('button sate',this.state)
   }
 
   render() {
@@ -54,7 +56,7 @@ class Choices extends React.Component  {
               Name:
               <input name="name" type="text"  onChange={(e) => this.handleChange(e)} />
             </label>
-            <select  name="pizzaType" onChange={(e) => this.handleChange(e)}>
+            <select  name="pizzaType" value="vegan" onChange={(e) => this.handleChange(e)}>
              <option name="pizzaType" value="vegan">VEGAN!!</option>
              <option name="pizzaType" value="veggie">Veggie</option>
              <option name="pizzaType" value="cheese">Cheese</option>
@@ -98,7 +100,7 @@ var Results = ({pizzas}) => (
           name={pizza.name}
           number={pizza.number}
           pieOrSlice={pizza.pieOrSlice}
-          type={pizza.type}
+          type={pizza.pizzaType}
         />
     )}
   </div>
